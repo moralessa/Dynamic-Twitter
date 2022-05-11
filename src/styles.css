@@ -123,7 +123,7 @@ body{
 }
 
 .tabs{
-    margin-top: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 .tabs ul{
@@ -142,11 +142,12 @@ body{
 
 .tabs ul li:hover{
     cursor: pointer; 
-    background-color: #f1f1f1;
-    border-bottom: 2px solid var(--primary-color);
+    background-color: rgba(145, 206, 245, 0.753);
 }
 
-
+.tabs ul li.active{
+    border-bottom: 2px solid var(--primary-color);
+}
 
 .tweet{
     position: relative;
