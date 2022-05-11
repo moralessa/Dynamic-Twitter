@@ -26,8 +26,8 @@ const users = {
     joinedDate: 'June 2009',
     followingCount: 103,
     followerCount: 47900000,
-    avatarURL: '../assets/elonmusk.jpg',
-    coverPhotoURL: '../assets/elonmusk-cover.jpeg',
+    avatarURL: 'elonmusk.jpg',
+    coverPhotoURL: 'elonmusk-cover.jpeg',
     tweets: [
       {
         text: 'I admit to judging books by their cover',
@@ -49,8 +49,8 @@ const users = {
     joinedDate: 'June 2009',
     followingCount: 274,
     followerCount: 53800000,
-    avatarURL: '../assets/billgates.jpg',
-    coverPhotoURL: '../assets/billgates-cover.jpeg',
+    avatarURL: 'billgates.jpg',
+    coverPhotoURL: 'billgates-cover.jpeg',
     tweets: [
       {
         text: 'Everybody asks, how is the next Windows coming along? But nobody asks how is Bill? :/',
@@ -67,6 +67,16 @@ const users = {
     ],
   },
 };
+
+// Functionality for image loading with webpack
+function importAll(r) {
+  const images = {};
+  // eslint-disable-next-line array-callback-return
+  r.keys().map((item) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+const images = importAll(require.context('../assets', false, /\.(png|jpe?g|svg)$/));
 
 const container = $('.container');
 // function to calulcate the amount of followers to get the proper formatting
@@ -96,7 +106,7 @@ function populateTweets(parentElement, usr) {
     temp.innerHTML = `
     <div class="tweet">
     <div class="tweet-profile">
-        <img src="${usr.avatarURL}" alt="${usr.displayName} profile picture" class="tweet-profile-img">
+        <img src="${images[usr.avatarURL]}" alt="${usr.displayName} profile picture" class="tweet-profile-img">
     </div>
     <div class="tweet-user-info">
         <h5>${usr.displayName}
@@ -137,10 +147,10 @@ container.html(`
 </h2>
 </div>
 <div class="cover-photo">
-<img src="${users[activeUser].coverPhotoURL}" alt="${users[activeUser].displayName} cover photo" id="cover-img" width="598">
+<img src="${images[users[activeUser].coverPhotoURL]}" alt="${users[activeUser].displayName} cover photo" id="cover-img" width="598">
 </div>
 <div class="profile-photo">
-<img src="${users[activeUser].avatarURL}" alt="${users[activeUser].displayName} avatar photo" id="profile-img">
+<img src="${images[users[activeUser].avatarURL]}" alt="${users[activeUser].displayName} avatar photo" id="profile-img">
 </div>
 <div class="follow-button">
 <button>Follow</button>
