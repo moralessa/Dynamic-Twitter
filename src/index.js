@@ -4,6 +4,11 @@ import './styles.css';
 
 const $ = require('jquery');
 
+// Start with creating container
+const containerCreation = document.createElement('div');
+containerCreation.classList.add('container');
+document.body.appendChild(containerCreation);
+
 // Functionality for dynamically loading profiles
 function getParameterByName(name, url = window.location.href) {
   const newName = name.replace(/[[\]]/g, '\\$&');
